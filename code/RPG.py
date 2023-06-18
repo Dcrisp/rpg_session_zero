@@ -1,9 +1,8 @@
 
 #Shop conversation
-in# Shop conversation
 player_purse = 7
 shop_inventory_values = {
-    "hat": 5,
+    "hat": 5,     #hat <4 ch, will not allign with other items
     "gloves": 3,
     "shoes": 7,  # use colons for dict, "", tab values
     "cape": 11,
@@ -27,11 +26,19 @@ def purse_check(shop_item, item_values, purse_value):
         print(
             f"you can't afford the {shop_item}! the {shop_item} will cost {item_values[shop_item]} gold and you only have {purse_value} gold in your purse")
 
+def show_shop_inventory(item_values):
+    """list a shop inventory
+    prints all items in a list on separate lines
+
+    :param item_values: the selected list
+    """
+    print("Here's what's in stock")
+    for item in item_values.keys():
+        print(f'\t{item} = {item_values[item]} gold')
 
 Shop = input('Would you like to see my wares? ')
 if Shop == 'yes':
-    for item in shop_inventory_values.keys():
-        print(item)
+    show_shop_inventory(shop_inventory_values)
 if Shop == 'no':
     print('Piss off then, I have other customers waiting!')
 
@@ -39,7 +46,7 @@ Next = input('What would you like to buy? ')
 if Next == 'hat':
     print(f"That will be {shop_inventory_values['hat']} gold")
     purse_check(shop_item='hat', item_values=shop_inventory_values, purse_value=player_purse)
-
+    #TODO update player_purse with new value -cost of item, close off shop interaction
 elif Next == 'gloves':
     print('That will be 3 gold')
 
@@ -50,11 +57,6 @@ elif Next == 'cape':
 elif Next == 'boots':
     print('That will be 10 gold')
 
-Buy = input('Can you afford that? ')
-if Buy == 'yes':
-    print('You have ' + str(purse_value))
-Check = input('Are you sure? ')
-if Check == 'yes':
 
     print('Excellent, thank-you for your custom')
 elif Check == 'no':
