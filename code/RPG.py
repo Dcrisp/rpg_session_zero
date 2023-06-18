@@ -36,31 +36,26 @@ def show_shop_inventory(item_values):
     for item in item_values.keys():
         print(f'\t{item} = {item_values[item]} gold')
 
-Shop = input('Would you like to see my wares? ')
-if Shop == 'yes':
-    show_shop_inventory(shop_inventory_values)
-if Shop == 'no':
-    print('Piss off then, I have other customers waiting!')
+def buy(item_values, purse_value):
+    """initial interaction for item selection
 
-Next = input('What would you like to buy? ')
-if Next == 'hat':
-    print(f"That will be {shop_inventory_values['hat']} gold")
-    purse_check(shop_item='hat', item_values=shop_inventory_values, purse_value=player_purse)
-    #TODO update player_purse with new value -cost of item, close off shop interaction
-elif Next == 'gloves':
-    print('That will be 3 gold')
+    :param item_values: selected list
+    :param purse_value: value of selected purse
+    """
+    shop = input('Would you like to see my wares? ')
+    if shop == 'yes':
+        show_shop_inventory(item_values)
+    if shop == 'no':
+        print('Piss off then, I have other customers waiting!')
 
-elif Next == 'shoes':
-    print('That will be 7 gold')
-elif Next == 'cape':
-    print('That will be 11 gold')
-elif Next == 'boots':
-    print('That will be 10 gold')
+    next = input('What would you like to buy? ')
+    if next in item_values.keys():
+        purse_check(shop_item=next, item_values=item_values, purse_value=purse_value)
+    else:
+        print(f"I don't have any {next}s here sunshine!")
+        buy(item_values=item_values,purse_value=purse_value)   #recursion
 
-
-    print('Excellent, thank-you for your custom')
-elif Check == 'no':
-    print('Out of my sight peasant!')
+buy(item_values=shop_inventory_values, purse_value=player_purse)
 
 import random
 c1ra = 'Craven!'
