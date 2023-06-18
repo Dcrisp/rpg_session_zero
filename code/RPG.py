@@ -1,24 +1,48 @@
 
 #Shop conversation
-inventory = ['hat', 'gloves', 'shoes', 'cape', 'boots']
-hatvalue = 5
-glovesvalue = 3
-shoesvalue = 7
-capevalue = 11
-bootsvalue = 10
-Playerpurse = 6
+in# Shop conversation
+player_purse = 7
+shop_inventory_values = {
+    "hat": 5,
+    "gloves": 3,
+    "shoes": 7,  # use colons for dict, "", tab values
+    "cape": 11,
+    "boots": 10,
+}  # dictionary to recall values
+
+
+# use_snake_case
+def purse_check(shop_item, item_values, purse_value):
+    """check player can afford item
+    a function to check whether the player has enough money in their purse to afford the selected item
+
+    :param shop_item: selected item from item values
+    :param item_values: value of all items
+    :param purse_value: current value of purse
+    """
+    if item_values[shop_item] <= purse_value:
+        print(
+            f'you can afford the {shop_item}! the {shop_item} will cost {item_values[shop_item]} gold and you have {purse_value} gold in your purse')
+    else:
+        print(
+            f"you can't afford the {shop_item}! the {shop_item} will cost {item_values[shop_item]} gold and you only have {purse_value} gold in your purse")
+
+
 Shop = input('Would you like to see my wares? ')
 if Shop == 'yes':
-    for item in inventory:
+    for item in shop_inventory_values.keys():
         print(item)
 if Shop == 'no':
     print('Piss off then, I have other customers waiting!')
 
 Next = input('What would you like to buy? ')
 if Next == 'hat':
-    print('That will be 5 gold')
+    print(f"That will be {shop_inventory_values['hat']} gold")
+    purse_check(shop_item='hat', item_values=shop_inventory_values, purse_value=player_purse)
+
 elif Next == 'gloves':
     print('That will be 3 gold')
+
 elif Next == 'shoes':
     print('That will be 7 gold')
 elif Next == 'cape':
@@ -28,13 +52,13 @@ elif Next == 'boots':
 
 Buy = input('Can you afford that? ')
 if Buy == 'yes':
-    print('You have ' + str(Playerpurse))
+    print('You have ' + str(purse_value))
 Check = input('Are you sure? ')
 if Check == 'yes':
-    print('Excellent, thank-you for your custom')
-elif Check =='no':
-    print('Out of my sight peasant!')
 
+    print('Excellent, thank-you for your custom')
+elif Check == 'no':
+    print('Out of my sight peasant!')
 
 import random
 c1ra = 'Craven!'
