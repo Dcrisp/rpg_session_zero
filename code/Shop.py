@@ -51,6 +51,12 @@ def show_shop_inventory(item_values):
         #player_inventory_values['purse'] += {sale_item_values[item]}
         #del sale_item_values.keys[item]
 
+def inventory_add(shop_item, item_values, player_item_values, purse_value):
+    player_item_values.update({shop_item})
+    purse_value -= item_values[shop_item]
+    print(f"You give the shopkeeper {item_values[shop_item]} gold and receive the {shop_item}, you put in your bag")
+
+
 def buy(item_values, purse_value):
     """initial interaction for item selection
 
@@ -63,6 +69,10 @@ def buy(item_values, purse_value):
         next = input('What would you like to buy? ')
         if next in item_values.keys():
             purse_check(shop_item=next, item_values=item_values, purse_value=purse_value)
+            confirm = input(f'Are you sure you want to buy {next}?')
+            if confirm == 'yes':
+                inventory_add(shop_item=next, item_values=shop_inventory_values, player_item_values=player_inventory_values, purse_value=player_inventory_values['purse'])
+
         else:
             print(f"I don't have any {next}s here sunshine!")
             buy(item_values=item_values,purse_value=purse_value)   #recursion
@@ -80,6 +90,7 @@ buy(item_values=shop_inventory_values, purse_value=player_inventory_values['purs
 shop_qu1 =input('Anything else? ')
 if shop_qu1 == 'yes':
     buy(item_values=shop_inventory_values, purse_value=player_inventory_values['purse'])
+
 if shop_qu1 =='no':
     print("On your way then, I've got work to do")
 
